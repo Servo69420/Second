@@ -38,24 +38,24 @@ public class Grenade : MonoBehaviour
 
         foreach (Collider nearbyObject in colliders)
         {
-            // Check if the nearby object is a zombie
+            Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                // Apply a force to the object
+                Vector3 direction = rb.transform.position - transform.position;
+                rb.AddExplosionForce(explosionForce, transform.position, blastRadius);
+            }
+
+            // Check if the nearby object is an enemy
             if (nearbyObject.gameObject.CompareTag("Enemy"))
             {
-                Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
-                if (rb != null)
+                // Apply damage to the zombie
+                Target enemyHealth = nearbyObject.GetComponent<Target>();
+                if (enemyHealth != null)
                 {
-                    // Apply a force to the object
-                    Vector3 direction = rb.transform.position - transform.position;
-                    rb.AddExplosionForce(explosionForce, transform.position, blastRadius);
-
-                    // Apply damage to the zombie
-                    ZombieHealth zombieHealth = nearbyObject.GetComponent<ZombieHealth>();
-                    if (zombieHealth != null)
-                    {
-                        // Calculate the damage based on the distance from the explosion center
-                        float damage = explosionForce * (1.0f - (nearbyObject.transform.position - transform.position).magnitude / blastRadius);
-                        zombieHealth.TakeDamage(damage);
-                    }
+                    // Calculate the damage based on the distance from the explosion center
+                    float damage = explosionForce * (1.0f - (nearbyObject.transform.position - transform.position).magnitude / blastRadius);
+                    enemyHealth.TakeDamage(damage);
                 }
             }
         }

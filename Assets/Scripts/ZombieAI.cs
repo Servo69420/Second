@@ -7,7 +7,7 @@ public class ZombieAI : MonoBehaviour
     public Transform player;
     
 
-    public float ZombieHealth;
+   
     public bool isProvoked = false;
 
     // Damage zombie deals
@@ -62,22 +62,5 @@ public class ZombieAI : MonoBehaviour
         agent.SetDestination(player.position);
     }
 
-    public void TakeDamage(float amount)
-    {
-        ZombieHealth -= amount;
-
-        if (ZombieHealth <= 0f)
-        {
-            Die();
-        }
-
-        // Zombie is provoked if it takes damage
-        isProvoked = true;
-    }
-
-    private void Die()
-    {
-        // Here you can add any logic that happens when the zombie dies
-        Debug.Log("Zombie Died");
-    }
+    
 }
