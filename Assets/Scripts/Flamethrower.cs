@@ -17,6 +17,7 @@ public class Flamethrower : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
+        Debug.Log("Particle collision detected with " + other.name);
         int numCollisionEvents = flameParticles.GetCollisionEvents(other, collisionEvents);
 
         Target target = other.GetComponent<Target>();
