@@ -4,8 +4,7 @@ public class Player : MonoBehaviour
 {
     public GameObject grenadePrefab;
     public float throwForce = 10f;
-
-    // Update is called once per frame
+   
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
@@ -13,7 +12,7 @@ public class Player : MonoBehaviour
             ThrowGrenade();
         }
     }
-
+    
     void ThrowGrenade()
     {
         // Create a new grenade

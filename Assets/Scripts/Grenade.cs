@@ -10,6 +10,19 @@ public class Grenade : MonoBehaviour
 
     private bool hasExploded = false;  // Check if the grenade has exploded
     public GameObject explosionEffect;
+    public AudioClip explosionSound;  // The sound of the explosion
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) // if AudioSource component doesn't exist, add one
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.clip = explosionSound;
+        audioSource.playOnAwake = false;  // Disable play on awake
+    }
 
     // Update is called once per frame
     void Update()
@@ -32,6 +45,9 @@ public class Grenade : MonoBehaviour
 
         // Get the ParticleSystem component
         ParticleSystem particles = explosion.GetComponent<ParticleSystem>();
+
+        // Play the explosion sound
+        audioSource.Play();
 
         // Destroy the explosion effect once it's finished playing
         Destroy(explosion, particles.main.duration + particles.main.startLifetime.constantMax);
