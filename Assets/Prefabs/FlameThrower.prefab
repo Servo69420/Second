@@ -2496,6 +2496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flameParticles: {fileID: 198663536934198432, guid: bb98861c48ad2024ca93498c7dd93a6c,
     type: 3}
+  damageAmount: 10
 --- !u!1 &6181114728483510614
 GameObject:
   m_ObjectHideFlags: 0
